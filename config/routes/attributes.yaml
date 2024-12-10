@@ -1,0 +1,10 @@
+# config/routes/attributes.yaml
+controllers:
+    resource:
+        path: ../../src/Controller/
+        namespace: Bits\Themply\Controller
+    type: attribute
+
+kernel:
+    resource: Bits\Themply\Controller\
+    type: attribute

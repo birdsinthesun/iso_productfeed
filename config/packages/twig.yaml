@@ -1,0 +1,14 @@
+twig:
+    file_name_pattern: '*.twig'
+    paths:
+        contao/templates: ~
+
+when@test:
+    twig:
+        strict_variables: true
+
+paths:
+  '%kernel.project_dir%/assets/images': images
+  
+
+    

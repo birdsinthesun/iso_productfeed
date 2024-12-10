@@ -1,0 +1,28 @@
+{% extends "@Contao/be_main" %}
+
+{% block headline %}
+{% endblock %}
+{% block main_content %}
+<style>#main_headline{display:none}.themply-form{font-size:30px;}#form_themes{height:50px;line-height:50px}</style>
+<div style="width:80%; float:left; padding-left:10%;padding-top:40px;">
+  
+  <div style="width:40%; float:right;">
+   <h1 style="font-size:30px;text-align: center"><a href="https://github.com/birdsinthesun" target='_blank'>birdsinthesun</a> </h1>
+   
+      <img src="{{ asset('images/logo.png', 'themply') }}" alt="Logo">
+     
+     
+</div><div style="width:50%; float:left;">
+      <p style="font-size:30px;line-height:42px;padding:20px;background-color: #ff00ff; border:1px solid #f9f;color:#fff"> 
+        Das {{themeName}} Theme konnte nicht generiert werden, weil das Verzeichnis files/{{verzeichnis}} nicht existiert. Bitte die Seite neu laden und ein gültiges Verzeichnis verwenden.</p>
+
+    </div>
+<div style="width:100%; float:left;">
+      <h2 style="font-size:60px;line-height:90px">Themply Theme-Generator</h2> 
+</div>
+ <iframe src="https://bootswatch.com/{{themeAlias}}/" title="{{themeName}}"
+  style=" width: 100%; height: 600px;">
+</iframe> 
+  </div>
+
+{% endblock %}
