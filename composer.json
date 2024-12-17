@@ -1,6 +1,6 @@
 {
-    "name": "birdsinthesun/themply",
-    "description": "Generiert Bootwatch Stylesheets",
+    "name": "birdsinthesun/iso_productfeed",
+    "description": "XML-File with Productinformation of all Products",
     "keywords": [
         "contao",
         "isotope",
@@ -24,7 +24,7 @@
     ],
     "homepage": "https://github.com/birdsinthesun/iso_productfeed",
     "repositories": {
-        "birdsinthesun/themply": {
+        "birdsinthesun/iso_productfeed": {
             "type": "path",
             "url": "/vendor/birdsinthesun/iso_productfeed"
         }
@@ -33,8 +33,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "symfony/apache-pack": "^1.0",
-        "contao/core-bundle": "^5.3",
+        "contao/core-bundle": "4.13.*",
         "isotope/core": "^2.9"
     },
     "config": {
@@ -47,7 +46,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Bits\\Iso_Productfeed\\": "src/"
+            "Bits\\IsoProductfeed\\": "src/"
         },
         "classmap": [
             "contao/"
@@ -92,7 +91,7 @@
     },
     "extra": {
          
-     "contao-manager-plugin": "Bits\\Iso_Productfeed\\ContaoManager\\Plugin",
+     "contao-manager-plugin": "Bits\\IsoProductfeed\\ContaoManager\\Plugin",
         "symfony": {
             "allow-contrib": false,
             "require": "6.4.*"

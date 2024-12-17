@@ -17,6 +17,6 @@ $container->loadFromExtension('twig', [
 $GLOBALS['BE_MOD']['isotope']['iso_productfeed'] = [
     'tables' => ['tl_iso_productfeed'], // Tabelle, die in diesem Modul verwaltet wird
     'icon'   => 'bundles/myextension/icon.svg', // Icon für den Menüpunkt
-    'callback' => 'birdsinthesun\iso_productfeed\Backend\Iso_ProductfeedModule' // Optionale Callback-Klasse für die Logik
+    'callback' => 'Bits\IsoProductfeed\Backend\ConfigModule' // Optionale Callback-Klasse für die Logik
 ];
 ?>

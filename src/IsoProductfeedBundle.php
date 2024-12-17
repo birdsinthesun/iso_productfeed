@@ -1,12 +1,12 @@
 <?php
 
-namespace Bits\Iso_Productfeed;
+namespace Bits\IsoProductfeed;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class Iso_ProductfeedBundle extends AbstractBundle
+class IsoProductfeedBundle extends AbstractBundle
 {
     
     public function loadExtension(
