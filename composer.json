@@ -10,7 +10,7 @@
         "xml"
     ],
     "type": "contao-module",
-    "license": "propriatary",
+    "license": "proprietary",
     "version":"dev-main",
     "minimum-stability": "stable",
     "prefer-stable": true,
