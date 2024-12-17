@@ -34,7 +34,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "contao/core-bundle": "4.13.*",
-        "isotope/core": "^2.9"
+        "isotope/isotope-core": "2.9.*"
     },
     "config": {
         "allow-plugins": {
