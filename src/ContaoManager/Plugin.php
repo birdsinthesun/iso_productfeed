@@ -1,5 +1,5 @@
 <?php
-// src/ContaoManager/Plugin.php
+
 namespace Bits\IsoProductfeed\ContaoManager;
 
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
@@ -10,25 +10,27 @@ use Bits\IsoProductfeed\IsoProductfeedBundle;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfonycasts\SassBundle\SymfonycastsSassBundle;
 
-class Plugin implements BundlePluginInterface,RoutingPluginInterface
+class Plugin implements BundlePluginInterface, RoutingPluginInterface
 {
+    /**
+     * Registers the IsoProductfeedBundle and specifies dependencies.
+     */
     public function getBundles(ParserInterface $parser): array
     {
         return [
             BundleConfig::create(IsoProductfeedBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class,'isotope'])
-                
-               
+                ->setLoadAfter([ContaoCoreBundle::class, 'isotope']), // Load after Contao Core and Isotope
         ];
     }
 
+    /**
+     * Loads the route collection for the bundle.
+     */
     public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel)
     {
         return $resolver
-            ->resolve(__DIR__.'/../Controller', 'attribute')
-            ->load(__DIR__.'/../Controller')
-        ;
+            ->resolve(__DIR__ . '/../Resources/config/routes.yaml', 'yaml')
+            ->load(__DIR__ . '/../Resources/config/routes.yaml');
     }
 }
