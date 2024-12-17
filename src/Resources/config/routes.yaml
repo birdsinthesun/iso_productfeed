@@ -1,10 +1,8 @@
-    Bits\Themply\Controller\BackendController:
-        path: /contao/iso_productfeed
-        controller: Bits\Iso_Productfeed\Controller\BackendController::__invoke
-        type: annotation
-    
-    bits.themply.controller.backendcontroller:
-        path: /contao/iso_productfeed
-        controller: Bits\Iso_Productfeed\Controller\BackendController::__invoke
-        type: annotation
-
+Bits\IsoProductfeed\Controller\BackendController:
+  path: /contao/iso_productfeed
+  controller: 'Bits\IsoProductfeed\Controller\BackendController::__invoke'
+  type: annotation
+bits.iso-productfeed.controller.backendcontroller:
+  path: /contao/iso_productfeed
+  controller: 'Bits\IsoProductfeed\Controller\BackendController::__invoke'
+  type: annotation
