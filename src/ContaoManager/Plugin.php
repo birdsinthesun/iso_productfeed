@@ -18,7 +18,7 @@ class Plugin implements BundlePluginInterface,RoutingPluginInterface
     {
         return [
             BundleConfig::create(IsoProductfeedBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])->setLoadAfter('isotope'])
+                ->setLoadAfter([ContaoCoreBundle::class],'isotope'])
                 
                
         ];
