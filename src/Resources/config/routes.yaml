@@ -5,4 +5,4 @@ Bits\IsoProductfeed\Controller\BackendController:
 bits.iso-productfeed.controller.backendcontroller:
   path: /contao/iso_productfeed
   controller: 'Bits\IsoProductfeed\Controller\BackendController::__invoke'
-  type: annotation
+  type: annotat
