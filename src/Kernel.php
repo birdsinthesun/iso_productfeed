@@ -1,6 +1,6 @@
 <?php
 
-namespace Bits\Themply;
+namespace Bits\IsoProductfeed;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;

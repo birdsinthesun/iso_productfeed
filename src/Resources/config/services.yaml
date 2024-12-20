@@ -23,9 +23,9 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     Bits\IsoProductfeed\:
-        resource: ../src
+        resource: ../../../src
         exclude: 
-            - ../src/{ContaoManager,DependencyInjection}
-         #   - '../src/Contao/ThemplyModule.php'
-         #   - '../src/Eventlistener/'
+            - ../../../src/{ContaoManager,DependencyInjection,Resources}
+           # - '../../../src/Backend/ConfigModule.php'
+           # - '../../../src/Eventlistener/'
    

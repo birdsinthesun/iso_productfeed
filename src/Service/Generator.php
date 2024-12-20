@@ -1,6 +1,6 @@
 <?php
 
-namespace Bits\Iso_Productfeed\Service;
+namespace Bits\IsoProductfeed\Service;
 
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;

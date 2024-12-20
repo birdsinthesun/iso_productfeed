@@ -1,10 +1,10 @@
 <?php
-namespace Bits\Themply\Contao;
+namespace Bits\IsoProductfeed\Backend;
 
 use Contao\Backend as Backend;
 use Contao\System;
 
-class ThemplyModule extends Backend
+class ConfigModule extends Backend
 {
     public function __construct()
     {
@@ -15,11 +15,11 @@ class ThemplyModule extends Backend
     public function generate():string
     {
         // Logik für das Backend-Modul
-        return 'hello world';
+        return 'hello world 1';
     }
     public function run():string
     {
         // Logik für das Backend-Modul
-        return 'hello world';
+        return 'hello world 1';
     }
 }

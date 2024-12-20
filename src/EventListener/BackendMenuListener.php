@@ -1,8 +1,8 @@
 <?php
 // src/EventListener/BackendMenuListener.php
-namespace Bits\Iso_Productfeed\EventListener;
+namespace Bits\IsoProductfeed\EventListener;
 
-use Bits\Iso_Productfeed\Controller\BackendController;
+use Bits\IsoProductfeed\Controller\BackendController;
 use Contao\CoreBundle\Event\ContaoCoreEvents;
 use Contao\CoreBundle\Event\MenuEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
