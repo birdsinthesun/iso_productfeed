@@ -47,17 +47,7 @@
     "autoload": {
         "psr-4": {
             "Bits\\IsoProductfeed\\": "src/"
-        },
-        "classmap": [
-            "contao/"
-        ],
-        "exclude-from-classmap": [
-            "contao/config/",
-            "contao/dca/",
-            "contao/languages/",
-            "contao/templates/"
-        ]
-    },
+        }
     "autoload-dev": {
         "psr-4": {
             "App\\Tests\\": "tests/"

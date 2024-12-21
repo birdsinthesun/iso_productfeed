@@ -2,8 +2,11 @@
 namespace Bits\IsoProductfeed\Controller;
 
 use Bits\IsoProductfeed\Backend\About;
+use Contao\CoreBundle\Framework\ContaoFramework;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AboutController
+class AboutController extends AbstractController
 {
     private $aboutService;
 
@@ -12,8 +15,11 @@ class AboutController
         $this->aboutService = $aboutService;
     }
 
-    public function getInfo()
+    public function index(): Response
     {
+        // Verwenden des Injected Services
         $this->aboutService->getInfo();
+
+        return new Response('About Service used');
     }
 }

@@ -3,13 +3,23 @@ namespace Bits\IsoProductfeed\Backend;
 
 use Contao\DataContainer;
 use Contao\System;
+use Contao\CoreBundle\Framework\ContaoFramework as Framework;
 
 class About
 {
+    
+    private $framework;
+    
+      public function __construct(Framework $framework)
+    {
+        $this->framework = $framework;
+    }
+    
     public function getInfo(DataContainer $dc): void
     {
         
-           // Prüfen, ob der Aufruf im Backend erfolgt
+        $this->framework->initialize();
+        // Prüfen, ob der Aufruf im Backend erfolgt
         if (System::getContainer()->get('contao.framework')->isBackend()) {   
         
             $container = System::getContainer();

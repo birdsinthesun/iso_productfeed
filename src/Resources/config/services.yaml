@@ -13,9 +13,7 @@ services:
     
     Bits\IsoProductfeed\Backend\About:
         class: Bits\IsoProductfeed\Backend\About
-        lazy: true
-        autowire: true
-        autoconfigure: true
+        lazy: false
         tags: ['container.no_inline']
         
     Bits\IsoProductfeed\Controller\AboutController:
