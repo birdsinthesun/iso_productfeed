@@ -10,15 +10,6 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-    
-    Bits\IsoProductfeed\Backend\About:
-        class: Bits\IsoProductfeed\Backend\AboutOnloadCallback
-        public: true
-        lazy: false
-        
-    Bits\IsoProductfeed\Controller\AboutController:
-        arguments:
-            $aboutService: '@Bits\IsoProductfeed\Backend\AboutOnloadCallback'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     Bits\IsoProductfeed\Controller\BackendController: 

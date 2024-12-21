@@ -12,24 +12,6 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
     (
         'dataContainer'             => DC_Table::class,
        // 'backlink'                  => 'do=iso_setup',
-        'onload_callback' => array
-        (
-          //  array('Bits\IsoProductfeed\Backend\AboutOnloadCallback', 'getInfo')
-          //  array('Isotope\Backend\ProductType\Permission', 'check'),
-			//array('tl_calendar', 'generateFeed')
-		),
-		'oncreate_callback' => array
-		(
-		//	array('tl_calendar', 'adjustPermissions')
-		),
-		'oncopy_callback' => array
-		(
-		//	array('tl_calendar', 'adjustPermissions')
-		),
-		'onsubmit_callback' => array
-		(
-		//	array('tl_calendar', 'scheduleUpdate')
-        ),
         'sql' => array
         (
             'keys' => array
@@ -52,8 +34,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         'label' => array
         (
             'fields'                => array('title'),
-            'showColumns'           => true,
-           // 'label_callback'        => array('\Isotope\Backend\ProductType\Label', 'generate')
+            'showColumns'           => true
         ),
         'operations' => array
         (
@@ -66,14 +47,11 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
             (
                 'href'              => 'act=copy',
                 'icon'              => 'copy.svg'
-              //  'button_callback'   => array('Isotope\Backend\ProductType\Callback', 'copyProductType')
             ),
             'delete' => array
             (
                 'href'              => 'act=delete',
                 'icon'              => 'delete.svg'
-            //    'attributes'        => 'onclick="if (!confirm(\'' . ($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? '') . '\')) return false; Backend.getScrollOffset();"',
-            //    'button_callback'   => array('Isotope\Backend\ProductType\Callback', 'deleteProductType')
             ),
             'show' => array
             (
