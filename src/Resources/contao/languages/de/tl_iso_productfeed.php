@@ -1,5 +1,8 @@
 <?php
-
+$GLOBALS['TL_LANG']['MOD']['iso_productfeed'] = [
+    'Iso Produktfeed', // Titel des Moduls
+    'Generiert eine XML-Datei mit allen Produkten.' // Beschreibung des Moduls
+];
 $GLOBALS['TL_LANG']['tl_iso_productfeed']['palettes']['default'] = [
     'global_legend' => 'Allgemeine Einstellungen',
     'product_legend' => 'Produkt-Eigenschaften'

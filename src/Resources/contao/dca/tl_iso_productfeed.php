@@ -14,7 +14,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
        // 'backlink'                  => 'do=iso_setup',
         'onload_callback' => array
         (
-            array('Bits\IsoProductfeed\Backend\AboutOnloadCallback', 'getInfo')
+          //  array('Bits\IsoProductfeed\Backend\AboutOnloadCallback', 'getInfo')
           //  array('Isotope\Backend\ProductType\Permission', 'check'),
 			//array('tl_calendar', 'generateFeed')
 		),
