@@ -1,7 +1,7 @@
 <?php
 namespace Bits\IsoProductfeed\Controller;
 
-use Bits\IsoProductfeed\Backend\About;
+use Bits\IsoProductfeed\Backend\AboutOnloadCallback;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +10,7 @@ class AboutController extends AbstractController
 {
     private $aboutService;
 
-    public function __construct(About $aboutService)
+    public function __construct(AboutOnloadCallback $aboutService)
     {
         $this->aboutService = $aboutService;
     }
