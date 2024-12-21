@@ -11,7 +11,7 @@
     ],
     "type": "contao-module",
     "license": "proprietary",
-    "version":"main",
+    "version": "main",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "authors": [
@@ -48,6 +48,7 @@
         "psr-4": {
             "Bits\\IsoProductfeed\\": "src/"
         }
+    },
     "autoload-dev": {
         "psr-4": {
             "App\\Tests\\": "tests/"
@@ -80,8 +81,7 @@
         "symfony/symfony": "*"
     },
     "extra": {
-         
-     "contao-manager-plugin": "Bits\\IsoProductfeed\\ContaoManager\\Plugin",
+        "contao-manager-plugin": "Bits\\IsoProductfeed\\ContaoManager\\Plugin",
         "symfony": {
             "allow-contrib": false,
             "require": "6.4.*"
