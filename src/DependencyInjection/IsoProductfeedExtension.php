@@ -11,6 +11,7 @@ class IsoProductfeedExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
+        
         // Lade Service-Definitionen aus einer services.yaml-Datei
         $loader = new \Symfony\Component\DependencyInjection\Loader\YamlFileLoader(
             $container,

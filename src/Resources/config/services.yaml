@@ -11,7 +11,16 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     
-
+    Bits\IsoProductfeed\Backend\About:
+        class: Bits\IsoProductfeed\Backend\About
+        lazy: true
+        autowire: true
+        autoconfigure: true
+        tags: ['container.no_inline']
+        
+    Bits\IsoProductfeed\Controller\AboutController:
+        arguments:
+            $aboutService: '@Bits\IsoProductfeed\Backend\About'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     Bits\IsoProductfeed\Controller\BackendController: 

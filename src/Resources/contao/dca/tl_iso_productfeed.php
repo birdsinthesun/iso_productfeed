@@ -1,6 +1,8 @@
 <?php
 
 use Contao\DC_Table;
+use Bits\IsoProductfeed\Model\ShopConfig;
+use Bits\IsoProductfeed\Model\Attribute;
 
 
 $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
@@ -9,11 +11,10 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
     'config' => array
     (
         'dataContainer'             => DC_Table::class,
-       // 'enableVersioning'          => true,
        // 'backlink'                  => 'do=iso_setup',
         'onload_callback' => array
         (
-         //   array('Isotope\Backend\ProductType\Callback', 'checkPermission'),
+            array('Bits\IsoProductfeed\Backend\About', 'getInfo')
           //  array('Isotope\Backend\ProductType\Permission', 'check'),
 			//array('tl_calendar', 'generateFeed')
 		),
@@ -44,25 +45,15 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         'sorting' => array
         (
             'mode'                  => 1,
-            'fields'                => array('name'),
+            'fields'                => array('title'),
             'flag'                  => 1,
-            'panelLayout'           => 'filter;search,limit'
+            'panelLayout'           => 'search,limit'
         ),
-        /*'label' => array
+        'label' => array
         (
-            'fields'                => array('name', 'variants', 'downloads', 'shipping_exempt'),
+            'fields'                => array('title'),
             'showColumns'           => true,
-            'label_callback'        => array('\Isotope\Backend\ProductType\Label', 'generate')
-        ),*/
-        'global_operations' => array
-        (
-            'all' => array
-            (
-                'label'             => &$GLOBALS['TL_LANG']['MSC']['all'],
-                'href'              => 'act=select',
-                'class'             => 'header_edit_all'
-               // 'attributes'        => 'onclick="Backend.getScrollOffset();"'
-            )
+           // 'label_callback'        => array('\Isotope\Backend\ProductType\Label', 'generate')
         ),
         'operations' => array
         (
@@ -95,7 +86,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                   => '{global_legend},shop_config,title,descrition,link;{product_legend},g_id,g_title,g_description,g_link,g_image,g_price,g_sale_price,g_availability',
+        'default'                   => '{global_legend},shop_config,title,description,link;{product_legend},g_id,g_title,g_description,g_link,g_image,g_price,g_sale_price,g_availability',
     ),
 
     // Fields
@@ -112,12 +103,13 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         //global_palette
         'shop_config' => array
 		(
-			'exclude'                 => true,
-			'inputType'               => 'pageTree',
-			'foreignKey'              => 'tl_iso_config.title',
-			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "int(10) unsigned NOT NULL default 0",
-			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+            'exclude'               => true,
+            'inputType'             => 'select',
+            'options_callback'      => function() {
+                return ShopConfig::findShopConfigurations();
+            },
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                   => "varchar(64) NOT NULL default ''"
 		),
         'title' => array
         (
@@ -131,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         (
             'exclude'               => true,
             'inputType'             => 'textarea',
-            'eval'                  => array('style'=>'height:80px', 'tl_class'=>'clr'),
+            'eval'                  => array('style'=>'height:160px', 'tl_class'=>'clr'),
             'sql'                   => "text NULL",
         ),
         'link' => array
@@ -147,105 +139,89 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         'g_id' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'sku',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_title' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'name',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_description' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'description',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_link' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'pages',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_image' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'images',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_price' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'price',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_sale_price' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'price',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>false, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         ),
         'g_availability' => array
         (
             'exclude'               => true,
-            'filter'                => true,
             'inputType'             => 'select',
-            'default'               => 'standard',
+            'default'               => 'type',
             'options_callback'      => function() {
-                return \Isotope\Model\Attribute::getModelTypeOptions();
+                return Attribute::getOptions();
             },
-            'reference'             => &$GLOBALS['TL_LANG']['MODEL']['tl_iso_product'],
-            'eval'                  => array('mandatory'=>true, 'submitOnChange'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
             'sql'                   => "varchar(64) NOT NULL default ''"
         )
         
