@@ -10,6 +10,12 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+   
+    Bits\IsoProductfeed\Contao\DC_IsoProductfeed:
+        arguments:
+            $twig: '@twig'
+    Bits\IsoProductfeed\EventListener\DataContainer\IsoProductfeedCallbackListener:
+        tags: ['contao.callback']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     Bits\IsoProductfeed\Controller\BackendController: 

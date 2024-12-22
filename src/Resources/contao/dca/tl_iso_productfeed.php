@@ -1,6 +1,7 @@
 <?php
 
-use Contao\DC_Table;
+
+use Bits\IsoProductfeed\Contao\DC_IsoProductfeed;
 use Bits\IsoProductfeed\Model\ShopConfig;
 use Bits\IsoProductfeed\Model\Attribute;
 
@@ -10,7 +11,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
     // Config
     'config' => array
     (
-        'dataContainer'             => DC_Table::class,
+        'dataContainer'             => DC_IsoProductfeed::class,
        // 'backlink'                  => 'do=iso_setup',
         'sql' => array
         (

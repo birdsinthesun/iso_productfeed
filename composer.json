@@ -34,7 +34,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "contao/core-bundle": "4.13.*",
-        "isotope/isotope-core": "2.9.*"
+        "isotope/isotope-core": "2.9.*",
+        "symfony/twig-bundle": "4.4.*"
     },
     "config": {
         "allow-plugins": {
