@@ -1,0 +1,17 @@
+twig:
+    foo: bar
+    debug: '%kernel.debug%'
+    strict_variables: true
+    file_name_pattern: '*.twig'
+    default: '%kernel.project_dir%/src/Resources/contao/templates'
+    paths:
+        '%kernel.project_dir%/src/Resources/contao/templates/BitsIsoProductfeed': 'BitsIsoProductfeed'
+
+when@test:
+    twig:
+        strict_variables: true
+
+
+  
+
+    

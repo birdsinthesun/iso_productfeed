@@ -28,7 +28,7 @@ class DC_IsoProductfeed extends DC_Table
         
 
 //$this->checkTemplate($twig);exit;
-        $html = $twig->render('@BitsIsoProductfeed/iso_productfeed_panel.html.twig', $templateData);
+        $html = $twig->render('@Contao/iso_productfeed_panel.html.twig', $templateData);
 
 
         return $html . parent::showAll(); // Das Original-Rendering bleibt erhalten
