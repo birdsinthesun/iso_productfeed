@@ -5,7 +5,7 @@ twig:
     file_name_pattern: '*.twig'
     default: '%kernel.project_dir%/src/Resources/contao/templates'
     paths:
-        'BitsIsoProductfeed': 'BitsIsoProductfeed'
+        '%kernel.project_dir%/src/Resources/contao/templates/BitsIsoProductfeed': 'BitsIsoProductfeed'
 
 when@test:
     twig:
