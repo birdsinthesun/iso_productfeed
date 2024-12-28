@@ -49,7 +49,7 @@ class Generator
         $arrTwigMeta['language'] = 'de'; // TODO: Shop-Config
         $arrTwigMeta['generate_time'] = date('r');
 
-        // show item Fields
+        // show item Fields for developement
         Controller::loadDataContainer($this->table);
         $itemXmlFields = $GLOBALS['TL_DCA'][$this->table]['fields'];
 

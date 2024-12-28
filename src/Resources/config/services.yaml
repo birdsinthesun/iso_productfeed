@@ -16,13 +16,8 @@ services:
             $twig: '@twig'
     Bits\IsoProductfeed\EventListener\DataContainer\IsoProductfeedOnSaveListener:
         tags: ['contao.callback']
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    Bits\IsoProductfeed\Controller\BackendController: 
-        arguments:
-             - '@contao.routing.scope_matcher'
-        tags:
-             - 'controller.service_arguments'
+    Bits\IsoProductfeed\EventListener\DataContainer\IsoProductsOnSaveListener:
+        tags: ['contao.callback']
             
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

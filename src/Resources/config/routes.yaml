@@ -1,8 +1,0 @@
-Bits\IsoProductfeed\Controller\BackendController:
-  path: /contao/iso_productfeed
-  controller: 'Bits\IsoProductfeed\Controller\BackendController::__invoke'
-
-bits.iso-productfeed.controller.backendcontroller:
-  path: /contao/iso_productfeed
-  controller: 'Bits\IsoProductfeed\Controller\BackendController::__invoke'
-
