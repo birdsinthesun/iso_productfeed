@@ -6,7 +6,7 @@ use Contao\Database;
 
 class Product
 {
-    private string $table = 'tl_iso_product'; // Tabelle der Produktdaten
+    private string $table = 'tl_iso_product'; 
 
     public function findAll(): array
     {

@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Contao\PageModel;
 use Contao\Environment;
 use Contao\Database;
+use Contao\System;
 use Bits\IsoProductfeed\Model\Product;
 use Bits\IsoProductfeed\Model\Price;
 use Bits\IsoProductfeed\Model\ShopConfig;
@@ -39,10 +40,10 @@ class IsoProductfeedOnSaveListener
         //generate Metadata of the Xml File
         $PageModel = PageModel::findByPk($dc->activeRecord->link);
         $arrTwigMeta = [];
-        $arrTwigMeta['shop_tilte'] = $dc->activeRecord->title;
-        $arrTwigMeta['shop_description'] = $dc->activeRecord->description;
-        $arrTwigMeta['shop_link'] = $PageModel->getFrontendUrl();
-        $arrTwigMeta['shop_language'] = 'de'; //ToDO Shop-Config
+        $arrTwigMeta['tilte'] = $dc->activeRecord->title;
+        $arrTwigMeta['link'] = $PageModel->getFrontendUrl();
+        $arrTwigMeta['description'] = $dc->activeRecord->description;
+        $arrTwigMeta['language'] = 'de'; //ToDO Shop-Config
         $arrTwigMeta['generate_time'] = date('r');
         
         // show item Fields
@@ -55,12 +56,7 @@ class IsoProductfeedOnSaveListener
             ARRAY_FILTER_USE_KEY
         );
 
-        // Iteriere durch die Felder
-        foreach ($itemXmlFields as $fieldName => $fieldConfig) {
-            // Verarbeite hier die Felder und ihre Konfiguration
-           var_dump("Feld: $fieldName");
-        }
-          //generate Items of the Xml File 
+         //generate Items of the Xml File 
          $products = new Product();
          $products = $products->findAll();
          $arrTwigItems = [];
@@ -76,22 +72,28 @@ class IsoProductfeedOnSaveListener
  
                 foreach ($products as $product) {
                     
-                    $arrTwigItems[$product['id']]['g_id'] = $product[$dc->activeRecord->g_id];
+                    $arrTwigItems[$product['id']]['g:id'] = $product[$dc->activeRecord->g_id];
                     $arrTwigItems[$product['id']]['g_tilte'] = $product[$dc->activeRecord->g_title];
-                    $arrTwigItems[$product['id']]['g_description'] = $product[$dc->activeRecord->g_description];
-                    $arrTwigItems[$product['id']]['g_link'] = $this->generateProductUrl($PageModel, $product);
-                    $arrTwigItems[$product['id']]['g_image'] = $this->generateImageSrc(unserialize($product[$dc->activeRecord->g_image]));
+                    $arrTwigItems[$product['id']]['g:description'] = $product[$dc->activeRecord->g_description];
+                    $arrTwigItems[$product['id']]['g:link'] = $this->generateProductUrl($PageModel, $product);
+                    $arrTwigItems[$product['id']]['g:image'] = $this->generateImageSrc(unserialize($product[$dc->activeRecord->g_image]));
                     $price = new Price();
                     $priceTiers = $price->findProductPricesWithTiers($product['id']);
                     $arrTwigItems[$product['id']]['g_price'] = $this->getPrice($dc,(int)$priceTiers[0]['price']);
-                    $arrTwigItems[$product['id']]['g_sale_price'] = $this->getPrice($dc,(int)$product[$dc->activeRecord->g_sale_price]);
-                    $arrTwigItems[$product['id']]['g_availability'] = $this->getAvailability($product[$dc->activeRecord->g_availability],$product['id']);
+                    $arrTwigItems[$product['id']]['g:sale_price'] = $this->getPrice($dc,(int)$product[$dc->activeRecord->g_sale_price]);
+                    $arrTwigItems[$product['id']]['g:availability'] = $this->getAvailability($product[$dc->activeRecord->g_availability],$product['id']);
      
                 }
 
             } 
-        
-        
+            
+            //Make Twig Template
+            $twig = System::getContainer()->get('twig'); 
+            $html = $twig->render('@Contao/xml_file.html.twig', 
+            [       'meta' => $arrTwigMeta,
+                    'products' => $arrTwigItems
+            ]);
+            //var_dump( $html);exit;
         }
         
         private function getPrice($dc,int $price){

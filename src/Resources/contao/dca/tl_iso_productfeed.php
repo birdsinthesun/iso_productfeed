@@ -185,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         (
             'exclude'               => true,
             'inputType'             => 'select',
-            'default'               => 'price',
+            'default'               => 'sale_price',
             'options_callback'      => function() {
                 return Attribute::getOptions();
             },
@@ -196,7 +196,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
         (
             'exclude'               => true,
             'inputType'             => 'select',
-            'default'               => 'type',
+            'default'               => 'availability',
             'options_callback'      => function() {
                 return Attribute::getOptions();
             },

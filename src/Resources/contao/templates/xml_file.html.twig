@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+    <channel>
+        <!-- Metadata Section -->
+       
+    {% for key, value in meta %}
+        <{{ key }}>{{ value }}</{{ key }}>
+    {% endfor %}
+        
+
+        <!-- Products Section -->
+         <items>
+            {% for product in products %}
+               <item>
+                    {% for key, value in product %}
+                        <{{ key }}>{{ value }}</{{ key }}>
+                    {% endfor %}
+               </item>
+            {% endfor %}
+          </items>
+    </channel>
+</rss>
