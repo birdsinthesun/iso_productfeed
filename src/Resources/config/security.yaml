@@ -1,0 +1,6 @@
+# config/packages/security.yaml
+security:
+    # Other configurations
+
+    csrf_protection:
+        enabled: true

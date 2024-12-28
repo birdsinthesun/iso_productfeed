@@ -14,6 +14,7 @@ services:
     Bits\IsoProductfeed\Contao\DC_IsoProductfeed:
         arguments:
             $twig: '@twig'
+    Symfony\Component\Security\Csrf\CsrfTokenManagerInterface: '@security.csrf.token_manager'
     Bits\IsoProductfeed\EventListener\DataContainer\IsoProductfeedOnSaveListener:
         tags: ['contao.callback']
     Bits\IsoProductfeed\EventListener\DataContainer\IsoProductsOnSaveListener:

@@ -23,13 +23,13 @@ class FeedbackType extends AbstractType
             $container = System::getContainer();
             $formFactory = $container->get('form.factory');
             $csrfTokenManager = $container->get('security.csrf.token_manager'); // Hole den CsrfTokenManager hier
-          $csrfToken = $csrfTokenManager->getToken('feedback_form')->getValue();
+            $csrfToken = $csrfTokenManager->getToken('feedback_form')->getValue();
             $builder
             ->add('name')
             ->add('email')
             ->add('message')
              ->add('_token', HiddenType::class, [
-                'data' => $options['csrf_token'], // Möglichkeit, CSRF-Token als Option zu übergeben
+                'data' => $csrfToken, // Möglichkeit, CSRF-Token als Option zu übergeben
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Senden',
