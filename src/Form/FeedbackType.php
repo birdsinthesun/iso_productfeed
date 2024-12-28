@@ -2,20 +2,39 @@
 
 namespace Bits\IsoProductfeed\Form;
 
+use Contao\System;
 use Bits\IsoProductfeed\Entity\Feedback;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+
 
 class FeedbackType extends AbstractType
 {
+    
+    
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
+       
+            $container = System::getContainer();
+            $formFactory = $container->get('form.factory');
+            $csrfTokenManager = $container->get('security.csrf.token_manager'); // Hole den CsrfTokenManager hier
+          $csrfToken = $csrfTokenManager->getToken('feedback_form')->getValue();
+            $builder
             ->add('name')
             ->add('email')
             ->add('message')
-        ;
+             ->add('_token', HiddenType::class, [
+                'data' => $options['csrf_token'], // Möglichkeit, CSRF-Token als Option zu übergeben
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Senden',
+            ]);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -23,11 +42,8 @@ class FeedbackType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Feedback::class,
             'csrf_protection' => true,
-            // the name of the hidden HTML field that stores the token
-            'csrf_field_name' => 'token',
-            // an arbitrary string used to generate the value of the token
-            // using a different string for each form improves its security
-            'csrf_token_id'   => 'feedback_item',
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'feedback_form'
         ]);
     }
 }

@@ -36,7 +36,8 @@
         "contao/core-bundle": "4.13.*",
         "isotope/isotope-core": "2.9.*",
         "symfony/twig-bundle": "5.4.*",
-        "symfony/form": "5.4.*"
+        "symfony/form": "5.4.*",
+        "symfony/security-csrf": "^5.0"
     },
     "config": {
         "allow-plugins": {
