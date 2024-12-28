@@ -2,7 +2,9 @@
 // src/Resources/config/config.php
 
 use Contao\CoreBundle\ContaoCoreBundle;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Component\Form\FormFactoryInterface;
+
 
 
 $GLOBALS['BE_MOD']['isotope']['iso_productfeed'] = [
@@ -10,14 +12,13 @@ $GLOBALS['BE_MOD']['isotope']['iso_productfeed'] = [
     'icon'   => 'bundles/myextension/icon.svg', // Icon für den Menüpunkt
    // 'callback' => 'Bits\IsoProductfeed\Contao\DC_IsoProductfeed' // Optionale Callback-Klasse für die Logik
 ];
-return static function (ContainerConfigurator $containerConfigurator) {
-$services = $containerConfigurator->services();
 
 
-$container->loadFromExtension('twig', [
-    'paths' => [
-        '%kernel.project_dir%/vendor/birdsinthesun/iso_productfeed/contao/templates' => '@Contao_Iso_ProductfeedBundle'
-    ]
-]);
-};
+
+return [
+    FrameworkBundle::class => ['all' => true],
+    ContaoCoreBundle::class => ['all' => true],
+    FormFactoryInterface::class => ['all' => true],
+   
+];
 ?>

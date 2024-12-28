@@ -8,6 +8,7 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Bits\IsoProductfeed\IsoProductfeedBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -21,7 +22,7 @@ class Plugin implements BundlePluginInterface, RoutingPluginInterface
     {
         return [
             BundleConfig::create(IsoProductfeedBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class, 'isotope',TwigBundle::class]), // Load after Contao Core and Isotope
+                ->setLoadAfter([ContaoCoreBundle::class, 'isotope',TwigBundle::class,FrameworkBundle::class]), // Load after Contao Core and Isotope
         ];
     }
 
