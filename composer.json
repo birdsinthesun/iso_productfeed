@@ -10,7 +10,7 @@
         "xml"
     ],
     "type": "contao-module",
-    "license": "proprietary",
+    "license": "Mit",
     "version": "main",
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -35,7 +35,8 @@
         "ext-iconv": "*",
         "contao/core-bundle": "4.13.*",
         "isotope/isotope-core": "2.9.*",
-        "symfony/twig-bundle": "5.4.*"
+        "symfony/twig-bundle": "5.4.*",
+        "symfony/form": "5.4.*"
     },
     "config": {
         "allow-plugins": {
