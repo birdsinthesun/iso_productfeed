@@ -40,18 +40,20 @@ class DC_IsoProductfeed extends DC_Table
     public function generateForm($request)
     {
         
-        // Hole den CSRF-Token-Manager aus dem Container
-        // Hole den CSRF-Token-Manager aus dem Container
-       // $csrfTokenManager = System::getContainer()->get('security.csrf.token_manager');
-       // $csrfToken = $csrfTokenManager->getToken('feedback_form')->getValue();
         // Formular erstellen
         $container = System::getContainer();
         $formFactory = $container->get('form.factory');
-       
+        // Hole den CSRF-Token-Manager aus dem Container
+        $csrfTokenManager = System::getContainer()->get('security.csrf.token_manager');
+        $csrfToken = $csrfTokenManager->getToken('feedback_form')->getValue();
+        
 
         $form = $formFactory->create(FeedbackType::class, null, [
-       // 'action' => ContaoEnvironment::get('base').ContaoEnvironment::get('request')
-            ]);
+       'action' => ContaoEnvironment::get('base').ContaoEnvironment::get('request'),
+        'csrf_token' => $csrfToken, 
+           
+        ]);
+        //var_dump('1: '. $csrfToken);
 
         $form->handleRequest($request);
 
