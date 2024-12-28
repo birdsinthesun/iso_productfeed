@@ -7,6 +7,8 @@ use Contao\PageModel;
 use Contao\Environment;
 use Contao\Database;
 use Contao\System;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Bits\IsoProductfeed\Model\Product;
 use Bits\IsoProductfeed\Model\Price;
 use Bits\IsoProductfeed\Model\ShopConfig;
@@ -89,11 +91,25 @@ class IsoProductfeedOnSaveListener
             
             //Make Twig Template
             $twig = System::getContainer()->get('twig'); 
-            $html = $twig->render('@Contao/xml_file.html.twig', 
+            $xml = $twig->render('@Contao/xml_file.html.twig', 
             [       'meta' => $arrTwigMeta,
                     'products' => $arrTwigItems
             ]);
-            //var_dump( $html);exit;
+            
+            // XML-Datei erstellen und speichern
+           
+
+            $filesystem = new Filesystem();
+
+            $filePath = '../files/'. $dc->activeRecord->id.'_'.$this->generateAlias($dc->activeRecord->title).'.xml';
+            var_dump($filePath);
+            try {
+                // Datei erstellen und schreiben
+                $filesystem->dumpFile($filePath, $xml);
+                echo "Datei wurde erfolgreich erstellt.";exit;
+            } catch (IOExceptionInterface $exception) {
+                echo "Fehler beim Erstellen der Datei: " . $exception->getPath();exit;
+            }
         }
         
         private function getPrice($dc,int $price){
@@ -200,6 +216,30 @@ class IsoProductfeedOnSaveListener
             }
 
             return  $result->label;
+        }
+
+        private function generateAlias(string $input): string
+        {
+            // Entfernt HTML-Tags
+            $alias = strip_tags($input);
+
+            // Ersetzt Umlaute und Sonderzeichen
+            $transliteration = [
+                'ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'ß' => 'ss',
+                'Ä' => 'Ae', 'Ö' => 'Oe', 'Ü' => 'Ue',
+            ];
+            $alias = strtr($alias, $transliteration);
+
+            // Ersetzt alle nicht-alphanumerischen Zeichen (außer Bindestriche) durch Bindestriche
+            $alias = preg_replace('/[^a-zA-Z0-9\-]+/', '-', $alias);
+
+            // Entfernt führende und nachfolgende Bindestriche
+            $alias = trim($alias, '-');
+
+            // Wandelt den Alias in Kleinbuchstaben um
+            $alias = strtolower($alias);
+
+            return $alias;
         }
 
 
