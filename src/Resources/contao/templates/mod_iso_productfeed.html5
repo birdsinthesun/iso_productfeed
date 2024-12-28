@@ -1,5 +1,0 @@
-<div class="backend-module">
-    <h1>IsoProductfeed Modul</h1>
-    <?= $this->about ?>
-    <?= $this->main ?>
-</div>

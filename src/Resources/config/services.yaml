@@ -14,7 +14,7 @@ services:
     Bits\IsoProductfeed\Contao\DC_IsoProductfeed:
         arguments:
             $twig: '@twig'
-    Bits\IsoProductfeed\EventListener\DataContainer\IsoProductfeedCallbackListener:
+    Bits\IsoProductfeed\EventListener\DataContainer\IsoProductfeedOnSaveListener:
         tags: ['contao.callback']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

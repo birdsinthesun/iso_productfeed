@@ -19,7 +19,7 @@ class DC_IsoProductfeed extends DC_Table
     public function showAll()
     {
         
-        $twig = System::getContainer()->get('twig'); // Twig-Umgebung abrufen
+        $twig = System::getContainer()->get('twig'); 
 
         $templateData = [
             'headline' => 'Willkommen im IsoProductfeed-Modul!',
@@ -27,15 +27,15 @@ class DC_IsoProductfeed extends DC_Table
         ];
         
 
-//$this->checkTemplate($twig);exit;
+
         $html = $twig->render('@Contao/iso_productfeed_panel.html.twig', $templateData);
 
 
-        return $html . parent::showAll(); // Das Original-Rendering bleibt erhalten
+        return $html . parent::showAll(); 
     }
     
     
-    public function checkTemplate(Environment $twig)
+    private function checkTemplate(Environment $twig)
     {
         $template = '@BitsIsoProductfeed/iso_productfeed_panel.html.twig';
 
