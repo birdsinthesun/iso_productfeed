@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                   => '{global_legend},shop_config,title,description,link;{product_legend},g_id,g_title,g_description,g_link,g_image,g_price,g_sale_price,g_availability',
+        'default'                   => '{global_legend},shop_config,title,description,link,link_isotope;{product_legend},g_id,g_title,g_description,g_link,g_image,g_price,g_sale_price,g_availability',
     ),
 
     // Fields
@@ -109,7 +109,16 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
 		(
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'foreignKey'              => 'tl_page.title',
+			'foreignKey'              => 'tl_page.id',
+			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'tl_class'=>'clr'),
+			'sql'                     => "int(10) unsigned NOT NULL default 0",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
+		),
+        'link_isotope' => array
+		(
+			'exclude'                 => true,
+			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.id',
 			'eval'                    => array('mandatory'=>true, 'fieldType'=>'radio', 'tl_class'=>'clr'),
 			'sql'                     => "int(10) unsigned NOT NULL default 0",
 			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')

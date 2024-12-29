@@ -32,6 +32,7 @@ class IsoProductsOnSaveListener
                     'id' => $id,
                     'link' => $productfeedConfig['link'],
                     'title' => $productfeedConfig['title'],
+                    'link_isotope' => $productfeedConfig['link_isotope'],
                     'description' => $productfeedConfig['description'],
                     'g_id' => $productfeedConfig['g_id'],
                     'g_title' =>$productfeedConfig['g_title'],

@@ -27,6 +27,7 @@ class IsoProductfeedOnSaveListener
                 'id' => $dc->activeRecord->id,
                 'link' => $dc->activeRecord->link,
                 'title' => $dc->activeRecord->title,
+                'link_isotope' => $dc->activeRecord->link_isotope,
                 'description' => $dc->activeRecord->description,
                 'g_id' => $dc->activeRecord->g_id,
                 'g_title' => $dc->activeRecord->g_title,

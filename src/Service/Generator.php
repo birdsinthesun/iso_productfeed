@@ -41,7 +41,9 @@ class Generator
         }
 
         // open a new File
-        $PageModel = PageModel::findByPk($this->productfeedConfig['link']);
+        $PageModel = PageModel::findById($this->productfeedConfig['link']);
+        $PageIsotopeModel = PageModel::findById($this->productfeedConfig['link_isotope']);
+        
         $arrTwigMeta = [];
         $arrTwigMeta['title'] = $this->productfeedConfig['title'];
         $arrTwigMeta['link'] = $PageModel->getFrontendUrl();
@@ -74,7 +76,7 @@ class Generator
                 $arrTwigItems[$product['id']]['g:id'] = $product[$this->productfeedConfig['g_id']];
                 $arrTwigItems[$product['id']]['g:title'] = $product[$this->productfeedConfig['g_title']];
                 $arrTwigItems[$product['id']]['g:description'] = $product[$this->productfeedConfig['g_description']];
-                $arrTwigItems[$product['id']]['g:link'] = $this->generateProductUrl($PageModel, $product);
+                $arrTwigItems[$product['id']]['g:link'] = $this->generateProductUrl($PageIsotopeModel, $product);
                 $arrTwigItems[$product['id']]['g:image'] = $this->generateImageSrc(unserialize($product[$this->productfeedConfig['g_image']]));
                 $price = new Price();
                 $priceTiers = $price->findProductPricesWithTiers($product['id']);

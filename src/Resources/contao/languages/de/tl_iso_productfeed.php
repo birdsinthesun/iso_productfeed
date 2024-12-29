@@ -25,6 +25,10 @@ $GLOBALS['TL_LANG']['tl_iso_productfeed'] = [
         0 => 'Shop-Link',
         1 => 'Wählen Sie eine Seite aus, auf die der Link verweisen soll.'
     ],
+    'link_isotope' => [
+        0 => 'Produkt-Detail-Seite',
+        1 => 'Wählen Sie eine Seite aus, auf die der Link verweisen soll.'
+    ],
     'g_id' => [
         0 => 'Produkt-ID',
         1 => 'Wählen Sie die ID der Produktgruppe aus'

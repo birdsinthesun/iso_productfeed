@@ -2,25 +2,19 @@
 
 namespace Bits\IsoProductfeed\Entity;
 
-use Bits\IsoProductfeed\Repository\FeedbackRepository;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FeedbackRepository::class)]
 class Feedback
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+  
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+   
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    
     private ?string $message = null;
 
     public function getId(): ?int
