@@ -43,7 +43,7 @@ class Generator
         // open a new File
         $PageModel = PageModel::findByPk($this->productfeedConfig['link']);
         $arrTwigMeta = [];
-        $arrTwigMeta['tilte'] = $this->productfeedConfig['title'];
+        $arrTwigMeta['title'] = $this->productfeedConfig['title'];
         $arrTwigMeta['link'] = $PageModel->getFrontendUrl();
         $arrTwigMeta['description'] = $this->productfeedConfig['description'];
         $arrTwigMeta['language'] = 'de'; // TODO: Shop-Config

@@ -22,29 +22,49 @@ class FeedbackType extends AbstractType
        
             $container = System::getContainer();
             $formFactory = $container->get('form.factory');
-            //var_dump('2: '.$options['csrf_token']);
             $builder
             ->add('name')
             ->add('email')
             ->add('message')
-             ->add('_token', HiddenType::class, [
-                'data' => $options['csrf_token'], // Möglichkeit, CSRF-Token als Option zu übergeben
+            ->add('FORM_SUBMIT', HiddenType::class, [
+                'property_path' => null,
+                'mapped' => false, 
+                'attr' => [                // Setzt den HTML-Name des Feldes
+                    'id' => 'FORM_SUBMIT',
+                    'name' => 'FORM_SUBMIT',
+                    'full_name' => 'FORM_SUBMIT',
+                     'value' => 'feedback_form',
+                ],
+               
+                'data' => 'feedback_form', // Möglichkeit, CSRF-Token als Option zu übergeben
+            ])
+            ->add('REQUEST_TOKEN', HiddenType::class, [
+                'property_path' => null,
+                'mapped' => false, 
+                'attr' => [                // Setzt den HTML-Name des Feldes
+                    'id' => 'REQUEST_TOKEN',
+                    'name' => 'REQUEST_TOKEN',
+                    'full_name' => 'REQUEST_TOKEN',
+                     'value' => $options['csrf_token_manager']->getToken('feedback_form')->getValue(),
+                ],
+               
+                'data' => $options['csrf_token_manager']->getToken('feedback_form')->getValue(), // Möglichkeit, CSRF-Token als Option zu übergeben
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Senden',
             ]);
         
     }
-
-    public function configureOptions(OptionsResolver $resolver): void
+     public function configureOptions(OptionsResolver $resolver): void
     {
-
         $resolver->setDefaults([
-            'data_class' => Feedback::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'feedback_form',
-            'csrf_token' => Null
+            'csrf_token_manager' => null, // Erforderlich, um den CSRF-Token-Manager zu übergeben
         ]);
     }
+
+
+    public function getBlockPrefix()
+        {
+            return ''; // Keine Präfixierung
+        }
 }

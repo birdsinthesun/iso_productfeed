@@ -17,9 +17,11 @@ class DC_IsoProductfeed extends DC_Table
 {
     protected $strTable = 'tl_iso_productfeed';
 
-    public function __construct($strTable)
-    {
-        parent::__construct($strTable);
+    public function __construct( $strTable
+){
+            
+            parent::__construct($strTable);
+            
     }
 
     public function showAll()
@@ -45,15 +47,20 @@ class DC_IsoProductfeed extends DC_Table
         $formFactory = $container->get('form.factory');
         // Hole den CSRF-Token-Manager aus dem Container
         $csrfTokenManager = System::getContainer()->get('security.csrf.token_manager');
-        $csrfToken = $csrfTokenManager->getToken('feedback_form')->getValue();
         
-
         $form = $formFactory->create(FeedbackType::class, null, [
-       'action' => ContaoEnvironment::get('base').ContaoEnvironment::get('request'),
-        'csrf_token' => $csrfToken, 
+            'action' => ContaoEnvironment::get('base').ContaoEnvironment::get('request'),
+            'csrf_protection' => false,
+            'csrf_field_name' => 'REQUEST_TOKEN',
+            'csrf_token_id'   => 'feedback_form',
+             'attr' => [
+                    'id' => 'feedback_form', // Setzt die ID des Formulars
+                    'name' => 'feedback_form', // Setzt die ID des Formulars
+                ],
+            'csrf_token_manager' => $csrfTokenManager
            
         ]);
-        //var_dump('1: '. $csrfToken);
+        var_dump('1: '. $csrfTokenManager->getToken('feedback_form')->getValue());
 
         $form->handleRequest($request);
 
