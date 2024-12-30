@@ -7,6 +7,7 @@ use Contao\System;
 use Contao\Environment as ContaoEnvironment;
 use Twig\Environment;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Contao\CoreBundle\Security\ContaoCsrfTokenManager;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,7 +19,7 @@ class DC_IsoProductfeed extends DC_Table
     protected $strTable = 'tl_iso_productfeed';
 
     public function __construct( $strTable
-){
+            ){
             
             parent::__construct($strTable);
             
@@ -46,11 +47,11 @@ class DC_IsoProductfeed extends DC_Table
         $container = System::getContainer();
         $formFactory = $container->get('form.factory');
         // Hole den CSRF-Token-Manager aus dem Container
-        $csrfTokenManager = System::getContainer()->get('security.csrf.token_manager');
+        $csrfTokenManager = System::getContainer()->get('contao.csrf.token_manager');
         
         $form = $formFactory->create(FeedbackType::class, null, [
             'action' => ContaoEnvironment::get('base').ContaoEnvironment::get('request'),
-            'csrf_protection' => false,
+            'csrf_protection' => true,
             'csrf_field_name' => 'REQUEST_TOKEN',
             'csrf_token_id'   => 'feedback_form',
              'attr' => [
