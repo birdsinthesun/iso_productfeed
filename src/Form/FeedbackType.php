@@ -52,6 +52,9 @@ class FeedbackType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Senden',
+                'attr' => [                // Setzt den HTML-Name des Feldes
+                     'value' => 'feedback_form'
+                ]
             ]);
         
     }

@@ -6,7 +6,6 @@ use Contao\DC_Table;
 use Contao\System;
 use Contao\Environment as ContaoEnvironment;
 use Twig\Environment;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Contao\CoreBundle\Security\ContaoCsrfTokenManager;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -48,12 +47,13 @@ class DC_IsoProductfeed extends DC_Table
         $formFactory = $container->get('form.factory');
         // Hole den CSRF-Token-Manager aus dem Container
         $csrfTokenManager = System::getContainer()->get('contao.csrf.token_manager');
+        $csrfTokenId = System::getContainer()->getParameter('contao.csrf_token_name');
         
         $form = $formFactory->create(FeedbackType::class, null, [
-            'action' => ContaoEnvironment::get('base').ContaoEnvironment::get('request'),
+            'action' => $request->getUri(),
             'csrf_protection' => true,
             'csrf_field_name' => 'REQUEST_TOKEN',
-            'csrf_token_id'   => 'feedback_form',
+            'csrf_token_id'   => $csrfTokenId,
              'attr' => [
                     'id' => 'feedback_form', // Setzt die ID des Formulars
                     'name' => 'feedback_form', // Setzt die ID des Formulars
@@ -61,12 +61,15 @@ class DC_IsoProductfeed extends DC_Table
             'csrf_token_manager' => $csrfTokenManager
            
         ]);
-        var_dump('1: '. $csrfTokenManager->getToken('feedback_form')->getValue());
-
+        
+        //var_dump($csrfTokenId.'1: '. $csrfTokenManager->getToken($csrfTokenId)->getValue());
+       
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+          //  var_dump('Submitted Token: ' . $request->request->get('REQUEST_TOKEN'));
+
+          //  var_dump($data);exit;
             return $this->processForm($data);
         }
 
