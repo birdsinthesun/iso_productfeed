@@ -23,7 +23,7 @@ class Plugin implements BundlePluginInterface, RoutingPluginInterface
     {
         return [
             BundleConfig::create(IsoProductfeedBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class, 'isotope',TwigBundle::class,FrameworkBundle::class,RoutingBundle::class]), // Load after Contao Core and Isotope
+                ->setLoadAfter([ContaoCoreBundle::class, 'isotope','isotope_rules','isotope_reports',TwigBundle::class,FrameworkBundle::class,RoutingBundle::class]), // Load after Contao Core and Isotope
         ];
     }
 
