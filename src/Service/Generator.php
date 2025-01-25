@@ -77,7 +77,7 @@ class Generator
                 $arrTwigItems[$product['id']]['g:title'] = $product[$this->productfeedConfig['g_title']];
                 $arrTwigItems[$product['id']]['g:description'] = $product[$this->productfeedConfig['g_description']];
                 $arrTwigItems[$product['id']]['g:link'] = $this->generateProductUrl($PageIsotopeModel, $product);
-                $arrTwigItems[$product['id']]['g:image'] = $this->generateImageSrc(unserialize($product[$this->productfeedConfig['g_image']]));
+                $arrTwigItems[$product['id']]['g:image_link'] = $this->generateImageSrc(unserialize($product[$this->productfeedConfig['g_image']]));
                 $price = new Price();
                 $priceTiers = $price->findProductPricesWithTiers($product['id']);
                 $arrTwigItems[$product['id']]['g:price'] = $this->getPrice((int)$priceTiers[0]['price']);

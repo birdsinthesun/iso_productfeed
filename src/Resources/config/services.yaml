@@ -1,31 +1,39 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters: null
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-   
+        autowire: true
+        autoconfigure: true
+
+    Bits\IsoProductfeed\Routing\DynamicRouteLoader:
+        arguments:
+            $resourceResolver: '@Bits\IsoProductfeed\Service\ResourceResolver'
+            $defaultFileName: 'default.xml'
+        tags: ['routing.loader']
+
+    Bits\IsoProductfeed\Service\ResourceResolver:
+        arguments:
+            $baseDirectory: '%kernel.project_dir%/files'
+            
+    Bits\IsoProductfeed\Controller\FeedController:
+        tags: ['controller.service_arguments']
+
     Bits\IsoProductfeed\Contao\DC_IsoProductfeed:
         arguments:
             $twig: '@twig'
+
     Bits\IsoProductfeed\EventListener\DataContainer\IsoProductfeedOnSaveListener:
         tags: ['contao.callback']
+
     Bits\IsoProductfeed\EventListener\DataContainer\IsoProductsOnSaveListener:
         tags: ['contao.callback']
+
     Symfony\Component\Form\FormFactoryInterface:
         alias: 'form.factory'
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+
     Bits\IsoProductfeed\:
-        resource: ../../../src
-        exclude: 
-            - ../../../src/{ContaoManager,DependencyInjection,Resources}
-           # - '../../../src/Backend/ConfigModule.php'
-           # - '../../../src/Eventlistener/'
-   
+        resource: '../../../src'
+        exclude:
+            - '../../../src/ContaoManager.php'
+            - '../../../src/DependencyInjection'
+            - '../../../src/Resources'
