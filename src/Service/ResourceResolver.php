@@ -2,13 +2,16 @@
 
 namespace Bits\IsoProductfeed\Service;
 
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
+
 class ResourceResolver
 {
     private string $baseDirectory;
 
-    public function __construct(string $baseDirectory)
+    public function __construct(ParameterBagInterface $parameterBag)
     {
-        $this->baseDirectory = rtrim($baseDirectory, '/');
+        $this->baseDirectory = rtrim($parameterBag->get('kernel.project_dir').'/files', '/');
     }
 
     public function resolveFilePath(string $fileName): string
@@ -21,6 +24,6 @@ class ResourceResolver
         // Dynamisch den Dateinamen bestimmen (z. B. durch Datenbankabfrage oder API-Aufruf)
         // Hier ein einfaches Beispiel:
         $files = glob($this->baseDirectory . '/*.xml');
-        return $files ? basename(reset($files)) : null; // Nimmt die erste gefundene XML-Datei
+        return $files ? basename(reset($files)) : ''; // Nimmt die erste gefundene XML-Datei
     }
 }

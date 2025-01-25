@@ -20,8 +20,7 @@ class DynamicRouteLoader extends Loader
 
     public function load($resource, string $type = null): RouteCollection
     {
-        
-        var_dump('DynamicRouteLoader: load called');
+       
         $routes = new RouteCollection();
 
         // Hole den Dateinamen aus dem Resolver oder verwende den Standardnamen
@@ -29,13 +28,18 @@ class DynamicRouteLoader extends Loader
 
         // Berechne den vollständigen Pfad
         $filePath = $this->resourceResolver->resolveFilePath($fileName);
-
-        $routes->add('serve_xml', new Route(
-            '/xml', // Die URL der Route
+        $routes->add($fileName, new Route(
+            '/files/'.$fileName, // Die URL der Route
             [
                 '_controller' => 'Bits\IsoProductfeed\Controller\FeedController::serveXml',
+                'fileName' => $fileName,
                 'filePath' => $filePath,
-            ]
+            ],
+            [], // Anforderungen (z. B. Constraints für Parameter)
+        [], // Standard-Optionen
+        'shop.bits-design.de', // Host (wird unten gesetzt)
+        ['https'], // Schemes (z. B. 'https' oder 'http')
+        ['GET'] // HTTP-Methoden
         ));
 
         return $routes;
@@ -43,7 +47,6 @@ class DynamicRouteLoader extends Loader
 
     public function supports($resource, string $type = null): bool
     {
-        var_dump('DynamicRouteLoader: supports called with type: ' . $type);
         return 'dynamic' === $type;
     }
 }

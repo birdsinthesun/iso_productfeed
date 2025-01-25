@@ -6,12 +6,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FeedController
 {
-    public function serveXml(string $fileName): Response
+    public function serveXml(string $fileName,string $filePath): Response
     {
-        $filePath = sprintf('%s/files/%s', $_SERVER['DOCUMENT_ROOT'], $fileName);
-
+        
+      //  var_dump('serveXml ',$fileName);
         if (!file_exists($filePath)) {
-            throw $this->createNotFoundException('The file does not exist.');
+            echo '<p>The file does not exist.</p>';
         }
 
         $content = file_get_contents($filePath);

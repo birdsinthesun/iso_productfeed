@@ -47,6 +47,7 @@ class Generator
         $arrTwigMeta = [];
         $arrTwigMeta['title'] = $this->productfeedConfig['title'];
         $arrTwigMeta['link'] = $PageModel->getFrontendUrl();
+        //$arrTwigMeta['atom:link'] = xml-file-url
         $arrTwigMeta['description'] = $this->productfeedConfig['description'];
         $arrTwigMeta['language'] = 'de'; // TODO: Shop-Config
         $arrTwigMeta['generate_time'] = date('r');
@@ -73,9 +74,11 @@ class Generator
             );
 
             foreach ($products as $product) {
+                $arrTwigItems[$product['id']]['g:condition'] = 'new';
+                $arrTwigItems[$product['id']]['g:brand'] = 'art bits-design';
                 $arrTwigItems[$product['id']]['g:id'] = $product[$this->productfeedConfig['g_id']];
                 $arrTwigItems[$product['id']]['g:title'] = $product[$this->productfeedConfig['g_title']];
-                $arrTwigItems[$product['id']]['g:description'] = $product[$this->productfeedConfig['g_description']];
+                $arrTwigItems[$product['id']]['g:description'] = strip_tags($product[$this->productfeedConfig['g_description']]);
                 $arrTwigItems[$product['id']]['g:link'] = $this->generateProductUrl($PageIsotopeModel, $product);
                 $arrTwigItems[$product['id']]['g:image_link'] = $this->generateImageSrc(unserialize($product[$this->productfeedConfig['g_image']]));
                 $price = new Price();
@@ -146,15 +149,15 @@ class Generator
                 break;
 
             case '10.000,00':
-                $price = number_format($price, $shopConfig['priceRoundPrecision'], ',', '.');
+                $price = number_format($price, $shopConfig['priceRoundPrecision'], '.', ',');
                 break;
 
             default:
-                $price = number_format($price, $shopConfig['priceRoundPrecision'], ',', '.');
+                $price = number_format($price, $shopConfig['priceRoundPrecision'], '.', ',');
                 break;
         }
 
-        $displayString = $useCurrencySymbol ? '€' : $string;
+        $displayString = $useCurrencySymbol ? 'EUR' : $string;
 
         switch ($case) {
             case 'right_0':

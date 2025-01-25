@@ -35,7 +35,7 @@ class Attribute extends Model
         // Benutze die ID als Key und den Name als Value
         $configs[$result->field_name] = $result->name;
     }
-
+         $configs['id'] = 'id';
     return $configs; // Gibt das Array zurück
     }
 }

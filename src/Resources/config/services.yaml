@@ -4,18 +4,17 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-
+            
     Bits\IsoProductfeed\Routing\DynamicRouteLoader:
+        autoconfigure: false
         arguments:
             $resourceResolver: '@Bits\IsoProductfeed\Service\ResourceResolver'
             $defaultFileName: 'default.xml'
-        tags: ['routing.loader']
-
-    Bits\IsoProductfeed\Service\ResourceResolver:
-        arguments:
-            $baseDirectory: '%kernel.project_dir%/files'
-            
+        tags:
+            - { name: 'routing.loader' }
+        
     Bits\IsoProductfeed\Controller\FeedController:
+        autoconfigure: false
         tags: ['controller.service_arguments']
 
     Bits\IsoProductfeed\Contao\DC_IsoProductfeed:
@@ -34,6 +33,8 @@ services:
     Bits\IsoProductfeed\:
         resource: '../../../src'
         exclude:
+            - '../../../src/Controller'
             - '../../../src/ContaoManager.php'
             - '../../../src/DependencyInjection'
             - '../../../src/Resources'
+            - '../../../src/Routing'
