@@ -36,7 +36,8 @@ Ein wichtiges Attribut, das Isotope jedoch nicht standardmäßig mitbringt, ist 
 
 Zusätzlich wird ein weiteres Attribut benötigt, wenn Produkte mit einem reduzierten Preis ausgezeichnet sind. Hierbei muss ein Attribut mit dem Feldnamen **Sale-Preis** (reduzierter Preis) in Isotope angelegt werden. Dieses Attribut stellt sicher, dass sowohl der ursprüngliche Preis als auch der reduzierte Preis korrekt im XML-Feed ausgegeben werden.
 
-**Wichtig:** Beide Attribute – **Availability** und **Sale-Preis** – müssen manuell in Isotope erstellt und den Produkten zugewiesen werden, damit sie ordnungsgemäß im Produktfeed erscheinen.
+**Wichtig:** Beide Attribute – **Availability** und **Sale-Preis** – müssen manuell in Isotope erstellt und den Produkten zugewiesen werden, damit sie ordnungsgemäß im Produktfeed erscheinen. Meta fordert zusätzlich noch die Attribute **Condition** und **Brand**.
+Hier ist die Referenz für die Feed-Datei: https://developers.facebook.com/docs/marketing-api/catalog/reference/#da-commerce
 
 ## 6. Aktuelle Einschränkungen
 
@@ -46,4 +47,4 @@ Die Erweiterung unterstützt derzeit keine Variantenprodukte oder Mehrsprachigke
 
 Mit der Erweiterung **Iso Productfeed** kannst du deine Produktdaten effizient und konform mit den Anforderungen von Plattformen wie Meta exportieren. Dank der flexiblen Konfiguration ist die Anpassung an verschiedene Bedürfnisse einfach möglich, auch wenn die Erweiterung aktuell noch einige Einschränkungen aufweist.
 
-Falls du weitere Fragen hast, steht dir die Dokumentation oder der Support zur Verfügung.
+Falls du weitere Fragen hast, steht dir der Support zur Verfügung.

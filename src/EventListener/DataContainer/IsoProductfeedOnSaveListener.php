@@ -35,6 +35,8 @@ class IsoProductfeedOnSaveListener
                 'g_image' => $dc->activeRecord->g_image,
                 'g_sale_price' => $dc->activeRecord->g_sale_price,
                 'g_availability' => $dc->activeRecord->g_availability,
+                'g_condition' => $dc->activeRecord->g_condition,
+                'g_brand' => $dc->activeRecord->g_brand
             ],
         ];
         $generator = new Generator($settings);

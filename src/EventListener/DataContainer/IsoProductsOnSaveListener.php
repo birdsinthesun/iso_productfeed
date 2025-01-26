@@ -40,6 +40,8 @@ class IsoProductsOnSaveListener
                     'g_image' => $productfeedConfig['g_image'],
                     'g_sale_price' => $productfeedConfig['g_sale_price'],
                     'g_availability' => $productfeedConfig['g_availability'],
+                    'g_condition' => $productfeedConfig['g_condition'],
+                    'g_brand' => $productfeedConfig['g_brand']
                 ],
             ];
             $generator = new Generator($settings);

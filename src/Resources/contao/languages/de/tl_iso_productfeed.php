@@ -60,11 +60,20 @@ $GLOBALS['TL_LANG']['tl_iso_productfeed'] = [
     'g_availability' => [
         0 => 'Produkt-Verfügbarkeit',
         1 => 'Wählen Sie die Verfügbarkeit der Produktgruppe aus.'
+    ],
+    'g_condition' => [
+        0 => 'Produkt-Zustand',
+        1 => 'Wählen Sie den Zustand der Produktgruppe aus.'
+    ],
+    'g_brand' => [
+        0 => 'Produkt-Marke',
+        1 => 'Wählen Sie die Marke der Produktgruppe aus.'
     ]
 ];
 
 $GLOBALS['TL_LANG']['tl_iso_productfeed']['attributes'] = [
 
+    'id' => 'ID',
     'type' => 'Type',
     'pages' => 'Seiten',
     'alias' => 'Alias',

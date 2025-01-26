@@ -74,8 +74,11 @@ class Generator
             );
 
             foreach ($products as $product) {
-                $arrTwigItems[$product['id']]['g:condition'] = 'new';
-                $arrTwigItems[$product['id']]['g:brand'] = 'art bits-design';
+                $arrTwigItems[$product['id']]['g:condition'] = $this->getAvailability(
+                    $product[$this->productfeedConfig['g_condition']],
+                    $product['id']
+                );
+                $arrTwigItems[$product['id']]['g:brand'] = $product[$this->productfeedConfig['g_brand']];;
                 $arrTwigItems[$product['id']]['g:id'] = $product[$this->productfeedConfig['g_id']];
                 $arrTwigItems[$product['id']]['g:title'] = $product[$this->productfeedConfig['g_title']];
                 $arrTwigItems[$product['id']]['g:description'] = strip_tags($product[$this->productfeedConfig['g_description']]);
@@ -194,6 +197,31 @@ class Generator
                 tl_iso_attribute_option p
             INNER JOIN 
                 tl_iso_product a ON p.id = a.availability
+            WHERE 
+                p.id = ? AND a.id = ?
+        ";
+
+        $result = $db->prepare($query)
+            ->execute($optionId, $productId);
+
+        if ($result->numRows < 1) {
+            return null;
+        }
+
+        return $result->label;
+    }
+    
+    private function getCondition($optionId, $productId): ?string
+    {
+        $db = Database::getInstance();
+
+        $query = "
+            SELECT 
+                p.label
+            FROM 
+                tl_iso_attribute_option p
+            INNER JOIN 
+                tl_iso_product a ON p.id = a.g_condition
             WHERE 
                 p.id = ? AND a.id = ?
         ";

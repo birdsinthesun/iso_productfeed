@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                   => '{global_legend},shop_config,title,description,link,link_isotope;{product_legend},g_id,g_title,g_description,g_link,g_image,g_price,g_sale_price,g_availability',
+        'default'                   => '{global_legend},shop_config,title,description,link,link_isotope;{product_legend},g_id,g_title,g_description,g_link,g_image,g_price,g_sale_price,g_availability,g_condition,g_brand',
     ),
 
     // Fields
@@ -206,6 +206,28 @@ $GLOBALS['TL_DCA']['tl_iso_productfeed'] = array
             'exclude'               => true,
             'inputType'             => 'select',
             'default'               => 'availability',
+            'options_callback'      => function() {
+                return Attribute::getOptions();
+            },
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                   => "varchar(64) NOT NULL default ''"
+        ),
+        'g_condition' => array
+        (
+            'exclude'               => true,
+            'inputType'             => 'select',
+            'default'               => 'g_condition', //condition ist vom System reserviert
+            'options_callback'      => function() {
+                return Attribute::getOptions();
+            },
+            'eval'                  => array('mandatory'=>true, 'tl_class'=>'w50'),
+            'sql'                   => "varchar(64) NOT NULL default ''"
+        ),
+        'g_brand' => array
+        (
+            'exclude'               => true,
+            'inputType'             => 'select',
+            'default'               => 'brand',
             'options_callback'      => function() {
                 return Attribute::getOptions();
             },
