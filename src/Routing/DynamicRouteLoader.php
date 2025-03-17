@@ -31,11 +31,11 @@ class DynamicRouteLoader extends Loader
             $filePath = $this->resourceResolver->resolveFilePath($fileName);
 
             $route = new Route(
-                '/files/' . $fileName, // Dynamische URL
+                '/files/' . $fileName.'.xml', // Dynamische URL
                 [
                     '_controller' => 'Bits\IsoProductfeed\Controller\FeedController::serveXml',
                     'fileName' => $fileName,
-                    'filePath' => $filePath,
+                    'filePath' => $filePath.'.xml',
                 ],
                 [], // Anforderungen
                 [], // Standard-Optionen
