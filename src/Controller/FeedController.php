@@ -9,7 +9,7 @@ class FeedController
     public function serveXml(string $fileName,string $filePath): Response
     {
         
-      //  var_dump('serveXml ',$fileName);
+      
         if (!file_exists($filePath)) {
             echo '<p>The file does not exist.</p>';
         }

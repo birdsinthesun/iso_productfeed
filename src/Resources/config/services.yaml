@@ -4,14 +4,14 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-            
+        
     Bits\IsoProductfeed\Routing\DynamicRouteLoader:
         autoconfigure: false
         arguments:
             $resourceResolver: '@Bits\IsoProductfeed\Service\ResourceResolver'
-            $defaultFileName: 'default.xml'
+            $db: '@doctrine.dbal.default_connection'
         tags:
-            - { name: 'routing.loader' }
+            - { name: routing.loader }
         
     Bits\IsoProductfeed\Controller\FeedController:
         autoconfigure: false

@@ -104,7 +104,7 @@ class Generator
 
         // XML-Datei erstellen und speichern
         $filesystem = new Filesystem();
-        $filePath = '../files/' . $this->productfeedConfig['id'] . '_' . $this->generateAlias($this->productfeedConfig['title']) . '.xml';
+        $filePath = '../files/' . $this->productfeedConfig['id'] . '-' . $this->generateAlias($this->productfeedConfig['title']) . '.xml';
 
         try {
             $filesystem->dumpFile($filePath, $xml);

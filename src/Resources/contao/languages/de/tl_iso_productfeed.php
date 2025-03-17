@@ -29,6 +29,10 @@ $GLOBALS['TL_LANG']['tl_iso_productfeed'] = [
         0 => 'Produkt-Detail-Seite',
         1 => 'Wählen Sie eine Seite aus, auf die der Link verweisen soll.'
     ],
+    'xml_filename' => [
+        0 => 'XML-Dateiname',
+        1 => 'Der Dateiname wird aus der Id der Shop-Konfiguration und dem Shop-Titel zusammengesetzt. Die Datei befindet sich nach der erstellung im Verzeichnis "files".'
+    ],
     'g_id' => [
         0 => 'Produkt-ID',
         1 => 'Wählen Sie die ID der Produktgruppe aus'
