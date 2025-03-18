@@ -11,13 +11,18 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Bits\IsoProductfeed\Form\FeedbackType;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 
 
 class DC_IsoProductfeed extends DC_Table
 {
     protected $strTable = 'tl_iso_productfeed';
+    
 
-    public function __construct( $strTable
+    public function __construct( $strTable,
             ){
             
             parent::__construct($strTable);
@@ -33,10 +38,27 @@ class DC_IsoProductfeed extends DC_Table
         return $this->generateForm($request) . parent::showAll();
     }
 
-    private function processForm(array $data)
+    private function processForm(array $data,$twig)
     {
-        // Daten speichern oder verarbeiten
-        return 'Formular erfolgreich verarbeitet.';
+        
+         $email = (new Email())
+            ->from($data['email'])
+            ->to(new Address('hello@bits-design.de'))
+            ->replyTo(new Address('hello@bits-design.de'))
+           
+            ->priority(Email::PRIORITY_HIGH)
+            ->subject('Feedback zu Iso Productfeed')
+            ->text($data['name'].': '.$data['message']);
+         $mailer = System::getContainer()->get('mailer');
+         $mailer->send($email);
+        
+        
+        
+        return $twig->render('@Contao/iso_productfeed_panel.html.twig', [
+            'form' => '',
+            'message' => 'Formular erfolgreich verarbeitet.'
+        ]);
+        
     }
 
     public function generateForm($request)
@@ -65,18 +87,23 @@ class DC_IsoProductfeed extends DC_Table
         //var_dump($csrfTokenId.'1: '. $csrfTokenManager->getToken($csrfTokenId)->getValue());
        
         $form->handleRequest($request);
+        $twig = $container->get('twig');
+         
          if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
           //  var_dump('Submitted Token: ' . $request->request->get('REQUEST_TOKEN'));
 
-          //  var_dump($data);exit;
-            return $this->processForm($data);
+            //var_dump($data);exit;
+            
+            
+            return $this->processForm($data,$twig);
         }
 
-        $twig = $container->get('twig');
+       
 
         return $twig->render('@Contao/iso_productfeed_panel.html.twig', [
             'form' => $form->createView(),
+            'message' =>''
         ]);
     }
 }

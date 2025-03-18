@@ -1,11 +1,32 @@
-<div class="iso-productfeed-form">
-    <h2>Feedback an bits design senden(noch nicht feritg)</h2>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+<style>
+  #feedback_form{font-size:20px;padding:14px;background-color: #fcfcfc; border:1px solid #ccc}
+  .iso-productfeed-form h2{font-size:30px;padding-bottom: 20px;}
+  #feedback_form >div{padding-bottom:20px;min-height:30px}
+  #feedback_form label{display:inline-block;width:160px;}
+  #feedback_form button{ float:right}
+  #message{min-height:60px}
+  #form_themes{height:50px;line-height:50px}
+  .iso-productfeed-panel{width:80%; clear:both;float:left;margin: 10%;  padding-left:10px; background: #f9f9f9; border: 1px solid #ccc;}</style>
+<div style="width:80%; clear:both;float:left; padding-left:10%;padding-top:40px;">
+  
+  <div style="width:40%; float:right;">
+   <h1 style="font-size:30px;text-align: center"><a href="https://github.com/birdsinthesun" target='_blank'>birdsinthesun</a> </h1>
+   
+      <img alt="birdsinthesun Logo" style="max-width:100%; height:auto; " src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMzQ0LjAwMDAwMHB0IiBoZWlnaHQ9IjM0NC4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDM0NC4wMDAwMDAgMzQ0LjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjE2LCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxOQo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwzNDQuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiPgo8cGF0aCBkPSJNMTY2OSAzMDIwIGMtMzUzIC00MSAtNjc4IC0yNDAgLTg3MCAtNTM2IGwtNDAgLTYxIC0xMjcgMzMgYy0xMzMgMzUKLTE4MiA0MSAtMTgyIDIzIDAgLTEzIDU0IC04MSAxMDAgLTEyNiAxOSAtMTkgNTQgLTUzIDc4IC03NiAzMSAtMzEgNDEgLTQ3IDM3Ci02MiAtNzAgLTI0MiAtODAgLTQyNiAtMzYgLTY0MCA5OCAtNDcwIDQ1OSAtODI4IDkzNiAtOTMwIDM5IC04IDEyMyAtMTggMTg3Ci0yMSBsMTE3IC03IDIzIC00NiBjMTMgLTI1IDMwIC00NiAzOCAtNDYgOSAwIDI5IC0zNiA1NSAtMTAwIDM1IC04OCA0MyAtMTAwCjY0IC05OSAxNyAxIDMwIC0xMSA1MiAtNDcgMzkgLTYyIDY5IC03NCA2OSAtMjcgMCAxNyAxIDE3IDIwIC0yIDExIC0xMSAyNwotMjAgMzYgLTIwIDI3IDAgMTAgNTMgLTc2IDI0MSAtNjggMTUxIC03NyAxNzUgLTYyIDE4MSA5IDQgNDkgMTYgODcgMjggMzQxCjEwNSA2MzMgMzgzIDc1NiA3MTkgMjE0IDU4NyAtMzYgMTIyMyAtNTkxIDE1MDQgLTE5MCA5NSAtNDU0IDE0MiAtNjcxIDExN3oKbTI5NyAtNDEgYzQzMiAtNjAgODA0IC0zNzAgOTQzIC03ODUgMTE2IC0zNDUgNjMgLTcyNiAtMTQyIC0xMDI5IC01MyAtNzgKLTE4NSAtMjE0IC0yNjcgLTI3NiAtMTExIC04NCAtMzYwIC0xOTkgLTQzMCAtMTk5IC0xMyAwIC00OCA3MSAtMTQ0IDI5NSAtMTEzCjI2MyAtMTM4IDMzNiAtMTEzIDMyOCA0IC0yIDIzIC0zIDQyIC0zIDM5IDAgNTUgLTIxIDM1IC00NSAtOSAtMTEgLTE3IC0xMgotMzEgLTQgLTI4IDE0IC0yNSAtMTIgNCAtMzkgMTggLTE3IDMwIC0yMCA2MiAtMTUgNDkgOCA2NSAyMyA2NSA2MCAwIDUyIC00NgoxMDMgLTkzIDEwMyAtMjkgMCAtMjggMSAzOSA3MyA4NiA5MCAxMjAgMTY4IDEzOSAzMjUgMTcgMTM1IDQ0IDIxMyA5MiAyNjYgMjEKMjQgNDYgNTcgNTYgNzUgbDE3IDMzIDEwMyAtNiBjMjA3IC0xMiAyOTAgLTEyIDI5NCAxIDUgMTUgLTM1IDI2IC0yMDggNTgKLTEwMCAxOCAtMTM3IDI5IC0xNDQgNDIgLTQxIDcyIC0xMjcgMTEzIC0yMzYgMTEzIC0xMDYgMCAtMTU0IC0zNSAtMTk0IC0xNDAKLTI5IC03NiAtMTA1IC0xNjQgLTEwNSAtMTIyIDAgMzMgLTI2IDc4IC03NCAxMzEgLTIzIDI1IC02OSA4NCAtMTAyIDEzMCAtODIKMTE2IC0xNTMgMTg3IC0yNTkgMjU4IC00OSAzMyAtMTEwIDc3IC0xMzQgOTcgLTI3IDIyIC01MiAzNiAtNjUgMzQgLTE5IC0zCi0yMSAtOSAtMTggLTUzIDIgLTI3IDggLTU0IDEzIC02MCA1IC01IDkgLTIyIDkgLTM3IDAgLTE2IDcgLTQ1IDE1IC02NSA4IC0xOQoxNSAtNDcgMTUgLTYyIDAgLTE1IDYgLTM1IDE0IC00NiA3IC0xMSAxNyAtMzYgMjEgLTU1IDQgLTE5IDEzIC00MiAyMCAtNTAgMTMKLTE1IDMwIC02MCAyMyAtNjAgLTIgMCAtNjIgMjQgLTEzNCA1MyAtNzEgMzAgLTE2NiA2NiAtMjExIDgxIGwtODMgMjggMTUgMjgKYzI1IDQ4IDEyOSAxNzIgMTk4IDIzNyAxNjggMTU3IDQwMiAyNzAgNjIyIDMwMiA4NyAxMiAyNDIgMTMgMzMxIDB6IG0tMTIzNAotNzk5IGM5IC0xNyAyOSAtMzUgNDQgLTQyIDE0IC03IDQxIC0yNiA2MCAtNDMgNTYgLTUxIDExMSAtOTUgMTE5IC05NSA0IDAgMjMKLTEzIDQyIC0zMCAxOCAtMTYgMzkgLTMwIDQ1IC0zMCA1IDAgMjYgLTEzIDQ1IC0zMCAxOCAtMTYgMzggLTMwIDQzIC0zMCA2IDAKMzUgLTE5IDY0IC00MiAzMCAtMjQgNzEgLTU0IDkxIC02OCAyMCAtMTQgNDYgLTM1IDU4IC00NyAzNyAtMzggMTM4IC04MyAxODUKLTgzIDIzIDAgNDIgLTEgNDIgLTMgMCAtMzQgMzYgLTIyNCA1MCAtMjY2IDExIC0zMSAyNyAtMTAxIDM1IC0xNTYgMTAgLTU4IDI2Ci0xMTggNDAgLTE0NSAxMyAtMjUgMzYgLTk5IDUxIC0xNjUgMzMgLTE1MSA1MCAtMTk0IDgwIC0yMDYgMTMgLTQgMjQgLTE2IDI0Ci0yNSAwIC0xNSAtMTIgLTE2IC0xMTcgLTExIC0xNDkgNyAtMjgyIDQxIC00MTkgMTA2IC0xMzIgNjMgLTIwOSAxMTYgLTMxMgoyMTUgLTEwNiAxMDIgLTE2OSAxODYgLTIzMSAzMDYgLTEzNyAyNjggLTE2NyA1NTEgLTg5IDg0MyAxMSA0MiAyMyA3NyAyNyA3NwozIDAgMTQgLTE0IDIzIC0zMHoiLz4KPC9nPgo8L3N2Zz4K" />
+     
+     
+</div><div style="width:60%; float:left; " class="iso-productfeed-form">
+    {% if form is iterable %}
+        <h2>Feedback an birdsinthesun senden oder Support suchen</h2>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    {% else %}
+        <h2>{{message}}</h2>
+    {% endif %}
 </div>
-
-<div class="iso-productfeed-panel" style="margin: 10px; padding: 10px; background: #f9f9f9; border: 1px solid #ccc;">
+</div>
+<div class="iso-productfeed-panel">
     <h2 style="font-size:24px; line-height:32px">Iso Productfeed</h2>
     <p style="font-size:16px; line-height:24px">Die Meta-XML-Datei ist eine Datei, die dabei hilft, Produktdaten zwischen verschiedenen Systemen auszutauschen. Sie sorgt dafür, dass alle wichtigen Informationen zu Ihren Produkten, wie Name, Preis, Verfügbarkeit und Bilder, zentral gespeichert sind und automatisch an andere Plattformen weitergegeben werden können.
 
