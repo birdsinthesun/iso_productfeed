@@ -1,6 +1,6 @@
 {
     "name": "birdsinthesun/iso_productfeed",
-    "description": "XML-File with Productinformation of all Products",
+    "description": "Die Contao-Erweiterung Iso Productfeed wurde entwickelt, um Produktdaten aus Isotope E-Commerce zu exportieren und beispielsweise für externe Marktplätze wie Meta (Facebook/Instagram) zu nutzen. Diese Anleitung erklärt die Konfiguration und die Nutzung der Erweiterung.",
     "keywords": [
         "contao",
         "isotope",
